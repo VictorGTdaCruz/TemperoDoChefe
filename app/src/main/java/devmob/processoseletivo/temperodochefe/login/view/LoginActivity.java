@@ -3,12 +3,12 @@ package devmob.processoseletivo.temperodochefe.login.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseUser;
 
 import devmob.processoseletivo.temperodochefe.R;
 import devmob.processoseletivo.temperodochefe.login.presenter.LoginPresenter;
@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     EditText emailField;
     EditText passwordField;
-    TextView loginStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,10 +28,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
         emailField = findViewById(R.id.email_field);
         passwordField = findViewById(R.id.password_field);
-        loginStatus = findViewById(R.id.login_status);
+
+        passwordField.setOnEditorActionListener(new EditText.OnEditorActionListener(){
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE){
+                    loginPresenter.validateAndLogIn(emailField,passwordField);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         findViewById(R.id.login_button).setOnClickListener(viewListener());
-        findViewById(R.id.logout_button).setOnClickListener(viewListener());
 
         loginPresenter = new LoginPresenterImpl(this);
     }
@@ -40,22 +48,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     @Override
     protected void onStart() {
         super.onStart();
-        updateUI(loginPresenter.currentUser());
-    }
-
-    public void updateUI(FirebaseUser user){
-        if (user != null) {
-            loginStatus.setText(getString(R.string.emailpassword_status_fmt,
-                    user.getEmail()));
-
-        } else {
-            loginStatus.setText(R.string.signed_out);
-        }
     }
 
     public void toastError(){
         Toast.makeText(this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
-        loginStatus.setText(R.string.auth_failed);
+    }
+
+    public void navigateToTables(String user){
+        // TODO Make transition to next screen
+        // intent.putExtra("LOGGED_USER", user);
     }
 
     private View.OnClickListener viewListener(){
@@ -65,9 +66,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
                 switch (v.getId()){
                     case R.id.login_button:
                         loginPresenter.validateAndLogIn(emailField, passwordField);
-                        break;
-                    case R.id.logout_button:
-                        loginPresenter.logOut();
                         break;
                 }
             }

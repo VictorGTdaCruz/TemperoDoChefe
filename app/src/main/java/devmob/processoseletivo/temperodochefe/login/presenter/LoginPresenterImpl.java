@@ -24,12 +24,12 @@ public class LoginPresenterImpl implements LoginPresenter{
         callback = new Callback() {
             @Override
             public void loginSuccess() {
-                loginView.updateUI(loginModel.currentUser());
+                String loggedUser = loginModel.currentUser().getEmail();
+                loginView.navigateToTables(loggedUser);
             }
 
             @Override
             public void loginError() {
-                loginView.updateUI(loginModel.currentUser());
                 loginView.toastError();
             }
         };
@@ -70,6 +70,5 @@ public class LoginPresenterImpl implements LoginPresenter{
     @Override
     public void logOut() {
         loginModel.logOut();
-        loginView.updateUI(currentUser());
     }
 }
