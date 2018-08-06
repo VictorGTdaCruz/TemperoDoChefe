@@ -6,9 +6,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import devmob.processoseletivo.temperodochefe.login.presenter.Callback;
+import devmob.processoseletivo.temperodochefe.login.presenter.LoginCallback;
 
 public class LoginModel {
 
@@ -18,15 +17,16 @@ public class LoginModel {
         auth = FirebaseAuth.getInstance();
     }
 
-    public void logIn(String email, String password, final Callback callback){
+    public void logIn(String email, String password, final LoginCallback loginCallback){
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            callback.loginSuccess();
+                            loginCallback.setCurrentUser(auth.getCurrentUser().getEmail());
+                            loginCallback.loginSuccess();
                         } else {
-                            callback.loginError();
+                            loginCallback.loginError();
                         }
                     }
                 });
@@ -34,9 +34,5 @@ public class LoginModel {
 
     public void logOut(){
         auth.signOut();
-    }
-
-    public FirebaseUser currentUser(){
-        return auth.getCurrentUser();
     }
 }

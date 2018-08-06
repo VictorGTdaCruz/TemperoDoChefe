@@ -1,7 +1,8 @@
 package devmob.processoseletivo.temperodochefe.login.presenter;
 
-public interface Callback {
+public interface LoginCallback {
 
     void loginSuccess();
     void loginError();
+    void setCurrentUser(String currentUser);
 }

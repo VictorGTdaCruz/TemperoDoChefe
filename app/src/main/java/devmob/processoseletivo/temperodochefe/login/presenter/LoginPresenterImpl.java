@@ -1,10 +1,5 @@
 package devmob.processoseletivo.temperodochefe.login.presenter;
 
-import android.text.TextUtils;
-import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseUser;
-
 import devmob.processoseletivo.temperodochefe.login.model.LoginModel;
 import  devmob.processoseletivo.temperodochefe.login.view.LoginView;
 
@@ -12,19 +7,28 @@ public class LoginPresenterImpl implements LoginPresenter{
 
     private LoginView loginView;
     private LoginModel loginModel;
-    private Callback callback;
 
-    String emailString, passwordString;
+    String emailString, passwordString, loggedUser;
 
     public LoginPresenterImpl(LoginView view){
         loginView = view;
 
         loginModel = new LoginModel();
+    }
 
-        callback = new Callback() {
+    @Override
+    public void validatedLogIn(String email, String password) {
+        emailString = email;
+        passwordString = password;
+
+        loginModel.logIn(emailString, passwordString, new LoginCallback() {
+            @Override
+            public void setCurrentUser(String currentUser){
+                loggedUser = currentUser;
+            }
+
             @Override
             public void loginSuccess() {
-                String loggedUser = loginModel.currentUser().getEmail();
                 loginView.navigateToTables(loggedUser);
             }
 
@@ -32,39 +36,7 @@ public class LoginPresenterImpl implements LoginPresenter{
             public void loginError() {
                 loginView.toastError();
             }
-        };
-    }
-
-    @Override
-    public FirebaseUser currentUser() {
-        return loginModel.currentUser();
-    }
-
-    @Override
-    public void validateAndLogIn(TextView email, TextView password) {
-        emailString = email.getText().toString();
-        passwordString = password.getText().toString();
-        boolean valid = true;
-
-        if (TextUtils.isEmpty(emailString)) {
-            email.setError("Required.");
-            valid = false;
-        } else {
-            email.setError(null);
-        }
-
-        if (TextUtils.isEmpty(passwordString)) {
-            password.setError("Required.");
-            valid = false;
-        } else {
-            password.setError(null);
-        }
-
-        if(!valid){
-            return;
-        }
-
-        loginModel.logIn(emailString, passwordString, callback);
+        });
     }
 
     @Override

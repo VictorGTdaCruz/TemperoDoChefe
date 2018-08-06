@@ -1,12 +1,7 @@
 package devmob.processoseletivo.temperodochefe.login.presenter;
 
-import android.widget.TextView;
-
-import com.google.firebase.auth.FirebaseUser;
-
 public interface LoginPresenter {
 
-    void validateAndLogIn(TextView email, TextView password);
+    void validatedLogIn(String email, String password);
     void logOut();
-    FirebaseUser currentUser();
 }
