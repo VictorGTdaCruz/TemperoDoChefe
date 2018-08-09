@@ -23,8 +23,7 @@ public class LoginModel {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            loginCallback.setCurrentUser(auth.getCurrentUser().getEmail());
-                            loginCallback.loginSuccess();
+                            loginCallback.loginSuccess(auth.getCurrentUser().getEmail());
                         } else {
                             loginCallback.loginError();
                         }

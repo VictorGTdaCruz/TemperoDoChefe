@@ -4,4 +4,5 @@ public interface LoginView {
 
     void toastError();
     void navigateToTables(String loggedUser);
+    void setFieldError(String field);
 }

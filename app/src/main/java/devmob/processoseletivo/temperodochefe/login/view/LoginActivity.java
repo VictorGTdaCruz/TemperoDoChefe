@@ -3,6 +3,7 @@ package devmob.processoseletivo.temperodochefe.login.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE){
-                    validateAndLogin();
+                    loginPresenter.validateAndLogin(emailField.getText().toString(), passwordField.getText().toString());
                     return true;
                 }
                 return false;
@@ -54,31 +55,20 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
         Toast.makeText(this, R.string.auth_failed, Toast.LENGTH_SHORT).show();
     }
 
-    private void validateAndLogin(){
-        boolean valid = true;
-
-        if (emailField.getText().toString().equals("")) {
-            emailField.setError("Required.");
-            valid = false;
-        } else {
-            emailField.setError(null);
+    @Override
+    public void setFieldError(String field) {
+        switch (field){
+            case "email":
+                emailField.setError("Required");
+                break;
+            case "password":
+                passwordField.setError("Required");
+                break;
         }
-
-        if (passwordField.getText().toString().equals("")) {
-            passwordField.setError("Required.");
-            valid = false;
-        } else {
-            passwordField.setError(null);
-        }
-
-        if(!valid){
-            return;
-        }
-
-        loginPresenter.validatedLogIn(emailField.getText().toString(), passwordField.getText().toString());
     }
 
     public void navigateToTables(String user){
+        Log.i("logged user:",user);
         // TODO Make transition to next screen
         // intent.putExtra("LOGGED_USER", user);
     }
@@ -89,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.login_button:
-                        validateAndLogin();
+                        loginPresenter.validateAndLogin(emailField.getText().toString(), passwordField.getText().toString());
                         break;
                 }
             }

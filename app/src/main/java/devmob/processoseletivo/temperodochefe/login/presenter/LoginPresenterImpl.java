@@ -8,8 +8,6 @@ public class LoginPresenterImpl implements LoginPresenter{
     private LoginView loginView;
     private LoginModel loginModel;
 
-    String emailString, passwordString, loggedUser;
-
     public LoginPresenterImpl(LoginView view){
         loginView = view;
 
@@ -17,18 +15,33 @@ public class LoginPresenterImpl implements LoginPresenter{
     }
 
     @Override
-    public void validatedLogIn(String email, String password) {
-        emailString = email;
-        passwordString = password;
+    public void validateAndLogin(String email, String password){
+        boolean valid = true;
 
-        loginModel.logIn(emailString, passwordString, new LoginCallback() {
-            @Override
-            public void setCurrentUser(String currentUser){
-                loggedUser = currentUser;
-            }
+        if (email.equals("")) {
+            loginView.setFieldError("email");
+            valid = false;
+        }
+
+        if (password.equals("")) {
+            loginView.setFieldError("password");
+            valid = false;
+        }
+
+        if(!valid){
+            return;
+        }
+
+        validatedLogin(email, password);
+    }
+
+    @Override
+    public void validatedLogin(String email, String password) {
+
+        loginModel.logIn(email, password, new LoginCallback() {
 
             @Override
-            public void loginSuccess() {
+            public void loginSuccess(String loggedUser) {
                 loginView.navigateToTables(loggedUser);
             }
 
