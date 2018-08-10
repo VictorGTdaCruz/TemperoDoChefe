@@ -1,5 +1,6 @@
 package devmob.processoseletivo.temperodochefe.mesas.view;
 
+import android.media.Image;
 import  android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,13 +8,27 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.google.firebase.FirebaseApp;
+import com.squareup.picasso.Picasso;
 
 import devmob.processoseletivo.temperodochefe.R;
+import devmob.processoseletivo.temperodochefe.mesas.model.Employee;
+import devmob.processoseletivo.temperodochefe.mesas.presenter.DatabaseCon;
+import devmob.processoseletivo.temperodochefe.mesas.presenter.EmployeeCallback;
+
 
 public class DesksActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DatabaseCon.EmployeeInfoInterface {
+
+    private ImageView empImageview;
+    private TextView empNameTextview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +46,13 @@ public class DesksActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        // Get the header reference
+        View header = navigationView.getHeaderView(0);
+        // Initialize the imageview and textview
+        empImageview = (ImageView) header.findViewById(R.id.employee_imageView);
+        empNameTextview = (TextView) header.findViewById(R.id.empUsernameTextview);
+        // Handle user data
+        DatabaseCon.getUserInfo("MAek02kKXHAWCnlcdYUqIhNfDi6r1", this);
     }
 
     @Override
@@ -70,5 +92,17 @@ public class DesksActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void employeeInforCallback(Employee emp) {
+        if (emp != null) {
+            // Update imageview
+            Picasso.get().load(emp.getPhotoUrl()).resize(256,256).into(empImageview);
+            // Update textview
+            empNameTextview.setText(emp.getName());
+        } else {
+            empImageview.setImageResource(R.drawable.image_profile);
+        }
     }
 }
