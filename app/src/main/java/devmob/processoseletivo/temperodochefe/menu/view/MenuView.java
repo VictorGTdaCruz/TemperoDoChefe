@@ -2,12 +2,16 @@ package devmob.processoseletivo.temperodochefe.menu.view;
 
 import java.util.ArrayList;
 
+import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
+
 public interface MenuView {
 
-    void setupRecyclerItems(ArrayList arrayList);
+    void setupOnItemClickListeners(MenuItemClickInterface menuItemButtonClickInterface, MenuItemClickInterface orderItemButtonClickInterface);
 
-    void showRequestError();
+    void getMenuItems(String tag);
 
-    void getMenuItems();
+    void showFirebaseError();
+
+    void setupRecyclerItems(ArrayList<ItemMenu> arrayList);
 
 }

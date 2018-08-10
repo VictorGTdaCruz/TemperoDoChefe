@@ -17,14 +17,14 @@ import devmob.processoseletivo.temperodochefe.menu.view.MenuView;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuItemClickInterface;
 import devmob.processoseletivo.temperodochefe.menu.view.adapter.MenuItemFragmentAdapter;
 
-public class MenuDrinksFragment extends BaseMenuFragment {
+public class MenuDishesFragment extends BaseMenuFragment {
 
-    public static String TAG = MenuDrinksFragment.class.getSimpleName();
+    public static String TAG = MenuDishesFragment.class.getSimpleName();
 
-    private MenuItemFragmentAdapter drinkAdapter;
+    private MenuItemFragmentAdapter dishAdapter;
 
-    public static MenuDrinksFragment newInstance(MenuView menuView, boolean isOrdering, MenuItemClickInterface teste) {
-        MenuDrinksFragment fragment = new MenuDrinksFragment();
+    public static MenuDishesFragment newInstance(MenuView menuView, boolean isOrdering, MenuItemClickInterface teste) {
+        MenuDishesFragment fragment = new MenuDishesFragment();
         fragment.setArguments(menuView, isOrdering, teste);
         return fragment;
     }
@@ -32,24 +32,24 @@ public class MenuDrinksFragment extends BaseMenuFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_drinks, container, false);
+        return inflater.inflate(R.layout.fragment_menu_dishes, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        drinkAdapter = new MenuItemFragmentAdapter(getActivity(), isOrdering, teste);
-        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_drinks);
+        dishAdapter = new MenuItemFragmentAdapter(getActivity(), isOrdering, teste);
+        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_dishes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(drinkAdapter);
+        recyclerView.setAdapter(dishAdapter);
 
         menuView.getMenuItems(TAG);
     }
 
     @Override
     public void setRecyclerItems(ArrayList<ItemMenu> arrayList) {
-        drinkAdapter.setItemMenuArrayList(arrayList);
+        dishAdapter.setItemMenuArrayList(arrayList);
         super.setRecyclerItems(arrayList);
     }
 }

@@ -3,6 +3,7 @@ package devmob.processoseletivo.temperodochefe.menu.view.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,39 +18,45 @@ import devmob.processoseletivo.temperodochefe.menu.view.MenuView;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuItemClickInterface;
 import devmob.processoseletivo.temperodochefe.menu.view.adapter.MenuItemFragmentAdapter;
 
-public class MenuDrinksFragment extends BaseMenuFragment {
+public class OrderFragment extends BaseMenuFragment {
 
-    public static String TAG = MenuDrinksFragment.class.getSimpleName();
+    public static String TAG = OrderFragment.class.getSimpleName();
 
-    private MenuItemFragmentAdapter drinkAdapter;
+    private MenuItemFragmentAdapter orderAdapter;
 
-    public static MenuDrinksFragment newInstance(MenuView menuView, boolean isOrdering, MenuItemClickInterface teste) {
-        MenuDrinksFragment fragment = new MenuDrinksFragment();
-        fragment.setArguments(menuView, isOrdering, teste);
+    private FloatingActionButton fab;
+
+    public static OrderFragment newInstance(MenuView menuView, MenuItemClickInterface teste) {
+        OrderFragment fragment = new OrderFragment();
+        fragment.setArguments(menuView, true, teste);
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_menu_drinks, container, false);
+        return inflater.inflate(R.layout.fragment_menu_order, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        drinkAdapter = new MenuItemFragmentAdapter(getActivity(), isOrdering, teste);
-        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_drinks);
+        fab = view.findViewById(R.id.menu_fab_order);
+
+        orderAdapter = new MenuItemFragmentAdapter(getActivity(), true, teste);
+        RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(drinkAdapter);
+        recyclerView.setAdapter(orderAdapter);
 
         menuView.getMenuItems(TAG);
     }
 
     @Override
     public void setRecyclerItems(ArrayList<ItemMenu> arrayList) {
-        drinkAdapter.setItemMenuArrayList(arrayList);
+        orderAdapter.setItemMenuArrayList(arrayList);
+        if (arrayList.isEmpty()) fab.hide();
+        else fab.show();
         super.setRecyclerItems(arrayList);
     }
 }
