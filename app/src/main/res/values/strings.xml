@@ -7,4 +7,23 @@
     <string name="emailpassword_status_fmt">Email User: %1$s Success</string>
 
 
+
+    <!-- Labels -->
+    <string name="label_activity_menu">Cardápio</string>
+
+    <!-- Flags -->
+    <string name="flag_menu_is_a_new_order">flag_menu_is_a_new_order</string>
+
+    <!-- Bottom Navigation -->
+    <string name="bottom_navigation_menu_drink">Bebidas</string>
+    <string name="bottom_navigation_menu_food">Comidas</string>
+    <string name="bottom_navigation_menu_dessert">Sobremesas</string>
+    <string name="bottom_navigation_menu_order">Pedido</string>
+
+    <!-- Menu -->
+    <string name="menu_error_firebase">Por favor, tente novamente</string>
+    <string name="menu_item_btn_text_add">Adicionar</string>
+    <string name="menu_item_btn_text_remove">Remover</string>
+    <string name="menu_item_add_message">Item adicionado ao pedido!</string>
+    <string name="menu_item_remove_message">Item removido dos pedidos!</string>
 </resources>
