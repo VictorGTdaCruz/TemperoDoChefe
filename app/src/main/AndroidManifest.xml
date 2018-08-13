@@ -21,8 +21,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".menu.view.MenuActivity"
+        <activity
+            android:name=".menu.view.MenuActivity"
             android:label="@string/label_activity_menu"/>
+
+        <activity
+            android:name=".mesas.view.DesksActivity"
+            android:label="@string/title_activity_mesas"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
