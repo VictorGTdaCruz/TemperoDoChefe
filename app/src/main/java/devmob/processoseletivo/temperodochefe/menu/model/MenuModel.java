@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import devmob.processoseletivo.temperodochefe.BuildConfig;
 import devmob.processoseletivo.temperodochefe.core.callback.SimpleCallback;
 import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
+import devmob.processoseletivo.temperodochefe.core.entities.Order;
 
 public class MenuModel {
 
@@ -39,6 +40,10 @@ public class MenuModel {
                 callback.onError(databaseError.getMessage());
             }
         });
+    }
+
+    public void makeNewOrder(Order order) {
+        database.child("pedidos").setValue(order);
     }
 
 }

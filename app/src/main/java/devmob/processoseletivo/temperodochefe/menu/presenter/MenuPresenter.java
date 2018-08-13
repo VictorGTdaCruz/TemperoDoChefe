@@ -4,4 +4,6 @@ public interface MenuPresenter {
 
     void getMenuItems(String tag);
 
+    void makeNewOrder(String table, String peopleAmount);
+
 }

@@ -87,6 +87,11 @@ public class MenuActivity extends AppCompatActivity implements MenuView {
         Toast.makeText(this, getString(R.string.menu_item_remove_message), Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void makeNewOrder(String table, String peopleAmount) {
+        menuPresenter.makeNewOrder(table, peopleAmount);
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationListener() {
         return new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

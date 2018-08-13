@@ -18,4 +18,6 @@ public interface MenuView {
 
     void showItemRemovedMessage();
 
+    void makeNewOrder(String table, String peopleAmount);
+
 }

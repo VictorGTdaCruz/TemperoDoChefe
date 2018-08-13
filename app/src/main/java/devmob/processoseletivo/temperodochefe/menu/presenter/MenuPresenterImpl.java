@@ -1,9 +1,11 @@
 package devmob.processoseletivo.temperodochefe.menu.presenter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import devmob.processoseletivo.temperodochefe.core.callback.SimpleCallback;
 import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
+import devmob.processoseletivo.temperodochefe.core.entities.Order;
 import devmob.processoseletivo.temperodochefe.menu.model.MenuModel;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuItemClickInterface;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuView;
@@ -41,6 +43,12 @@ public class MenuPresenterImpl implements MenuPresenter{
                 menuView.setupRecyclerItems(orderArrayList);
             }
         });
+    }
+
+    @Override
+    public void makeNewOrder(String table, String peopleAmount) {
+        menuModel.makeNewOrder(new Order(Integer.parseInt(table), getOrderPrice(), Integer.parseInt(peopleAmount),
+                String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)), orderArrayList));
     }
 
     @Override
@@ -94,5 +102,13 @@ public class MenuPresenterImpl implements MenuPresenter{
                     break;
             }
         }
+    }
+
+    private int getOrderPrice() {
+        int total = 0;
+        for (ItemMenu item : orderArrayList) {
+            total += item.getPrice();
+        }
+        return total;
     }
 }
