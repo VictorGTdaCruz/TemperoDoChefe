@@ -1,14 +1,12 @@
 package devmob.processoseletivo.temperodochefe.menu.presenter;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 import devmob.processoseletivo.temperodochefe.core.callback.SimpleCallback;
 import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
 import devmob.processoseletivo.temperodochefe.menu.model.MenuModel;
-import devmob.processoseletivo.temperodochefe.menu.view.MenuView;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuItemClickInterface;
+import devmob.processoseletivo.temperodochefe.menu.view.MenuView;
 import devmob.processoseletivo.temperodochefe.menu.view.fragments.MenuDessertsFragment;
 import devmob.processoseletivo.temperodochefe.menu.view.fragments.MenuDishesFragment;
 import devmob.processoseletivo.temperodochefe.menu.view.fragments.MenuDrinksFragment;
@@ -33,11 +31,13 @@ public class MenuPresenterImpl implements MenuPresenter{
             @Override
             public void onClickItemButton(ItemMenu itemMenu) {
                 orderArrayList.add(itemMenu);
+                menuView.showItemAddedMessage();
             }
         }, new MenuItemClickInterface() {
             @Override
             public void onClickItemButton(ItemMenu itemMenu) {
                 orderArrayList.remove(itemMenu);
+                menuView.showItemRemovedMessage();
                 menuView.setupRecyclerItems(orderArrayList);
             }
         });

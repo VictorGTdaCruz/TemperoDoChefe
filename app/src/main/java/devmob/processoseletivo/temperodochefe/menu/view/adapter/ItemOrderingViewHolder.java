@@ -6,8 +6,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import devmob.processoseletivo.temperodochefe.R;
 import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
+import devmob.processoseletivo.temperodochefe.core.util.CurrencyUtil;
 import devmob.processoseletivo.temperodochefe.menu.view.MenuItemClickInterface;
 
 public class ItemOrderingViewHolder extends RecyclerView.ViewHolder{
@@ -26,13 +29,16 @@ public class ItemOrderingViewHolder extends RecyclerView.ViewHolder{
         item_btn_order = itemView.findViewById(R.id.item_btn_order);
     }
 
-    public void bindData(final ItemMenu itemMenu, final MenuItemClickInterface clickInterface) {
+    public void bindData(final ItemMenu itemMenu, boolean isOrderingFragment, final MenuItemClickInterface clickInterface) {
+        Picasso.get().load(itemMenu.getImg()).into(item_img);
+
         item_name.setText(itemMenu.getName());
 
-        String price = Integer.toString(itemMenu.getPrice());
+        String price = CurrencyUtil.ApplyCurrency(itemMenu.getPrice());
         item_price.setText(price);
 
-        item_btn_order.setText(R.string.menu_item_btn_text);
+        if (isOrderingFragment) item_btn_order.setText(R.string.menu_item_btn_text_remove);
+        else item_btn_order.setText(R.string.menu_item_btn_text_add);
         item_btn_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

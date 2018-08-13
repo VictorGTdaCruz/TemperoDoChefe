@@ -14,4 +14,8 @@ public interface MenuView {
 
     void setupRecyclerItems(ArrayList<ItemMenu> arrayList);
 
+    void showItemAddedMessage();
+
+    void showItemRemovedMessage();
+
 }

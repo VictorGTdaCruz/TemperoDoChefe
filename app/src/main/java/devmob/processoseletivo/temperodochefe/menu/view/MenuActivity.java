@@ -77,6 +77,16 @@ public class MenuActivity extends AppCompatActivity implements MenuView {
         if (currentFragment != null) currentFragment.setRecyclerItems(arrayList);
     }
 
+    @Override
+    public void showItemAddedMessage() {
+        Toast.makeText(this, getString(R.string.menu_item_add_message), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showItemRemovedMessage() {
+        Toast.makeText(this, getString(R.string.menu_item_remove_message), Toast.LENGTH_SHORT).show();
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationListener() {
         return new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

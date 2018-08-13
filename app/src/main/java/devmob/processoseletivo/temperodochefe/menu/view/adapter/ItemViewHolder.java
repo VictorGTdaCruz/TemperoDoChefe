@@ -5,8 +5,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import devmob.processoseletivo.temperodochefe.R;
 import devmob.processoseletivo.temperodochefe.core.entities.ItemMenu;
+import devmob.processoseletivo.temperodochefe.core.util.CurrencyUtil;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder{
 
@@ -23,9 +26,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bindData(final ItemMenu itemMenu) {
+        Picasso.get().load(itemMenu.getImg()).into(item_img);
+
         item_name.setText(itemMenu.getName());
 
-        String price = Integer.toString(itemMenu.getPrice());
+        String price = CurrencyUtil.ApplyCurrency(itemMenu.getPrice());
         item_price.setText(price);
     }
 }

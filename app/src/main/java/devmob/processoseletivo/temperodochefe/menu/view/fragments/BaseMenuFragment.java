@@ -19,14 +19,14 @@ public abstract class BaseMenuFragment extends Fragment {
 
     protected MenuView menuView;
     protected boolean isOrdering;
-    protected MenuItemClickInterface teste;
+    protected MenuItemClickInterface menuItemClickInterface;
     protected ProgressBar progressBar;
     protected TextView emptyText;
 
-    public void setArguments(MenuView menuView, boolean isOrdering, MenuItemClickInterface teste) {
+    public void setArguments(MenuView menuView, boolean isOrdering, MenuItemClickInterface menuItemClickInterface) {
         this.menuView = menuView;
         this.isOrdering = isOrdering;
-        this.teste = teste;
+        this.menuItemClickInterface = menuItemClickInterface;
     }
 
     @Override

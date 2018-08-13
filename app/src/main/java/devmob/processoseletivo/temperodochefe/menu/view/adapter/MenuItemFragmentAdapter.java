@@ -2,6 +2,7 @@ package devmob.processoseletivo.temperodochefe.menu.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,13 +21,16 @@ public class MenuItemFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     private Context context;
 
     private boolean isOrdering;
+    private boolean isOrderFragment;
 
     private MenuItemClickInterface clickInterface;
 
-    public MenuItemFragmentAdapter(Context context, boolean isOrdering, MenuItemClickInterface clickInterface) {
+    public MenuItemFragmentAdapter(Context context, MenuItemClickInterface clickInterface,
+                                   boolean isOrdering, @Nullable boolean isOrderFragment ) {
         this.context = context;
         this.isOrdering = isOrdering;
         this.clickInterface = clickInterface;
+        this.isOrderFragment = isOrderFragment;
     }
 
     @NonNull
@@ -47,7 +51,7 @@ public class MenuItemFragmentAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ItemOrderingViewHolder) {
             ItemOrderingViewHolder orderingViewHolder = (ItemOrderingViewHolder) holder;
-            orderingViewHolder.bindData(itemMenuArrayList.get(position), clickInterface);
+            orderingViewHolder.bindData(itemMenuArrayList.get(position), isOrderFragment, clickInterface);
         } else {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.bindData(itemMenuArrayList.get(position));

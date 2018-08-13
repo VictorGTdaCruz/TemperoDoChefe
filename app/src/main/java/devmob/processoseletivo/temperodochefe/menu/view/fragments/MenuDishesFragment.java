@@ -23,9 +23,9 @@ public class MenuDishesFragment extends BaseMenuFragment {
 
     private MenuItemFragmentAdapter dishAdapter;
 
-    public static MenuDishesFragment newInstance(MenuView menuView, boolean isOrdering, MenuItemClickInterface teste) {
+    public static MenuDishesFragment newInstance(MenuView menuView, boolean isOrdering, MenuItemClickInterface menuItemClickInterface) {
         MenuDishesFragment fragment = new MenuDishesFragment();
-        fragment.setArguments(menuView, isOrdering, teste);
+        fragment.setArguments(menuView, isOrdering, menuItemClickInterface);
         return fragment;
     }
 
@@ -39,7 +39,7 @@ public class MenuDishesFragment extends BaseMenuFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dishAdapter = new MenuItemFragmentAdapter(getActivity(), isOrdering, teste);
+        dishAdapter = new MenuItemFragmentAdapter(getActivity(), menuItemClickInterface, isOrdering, false);
         RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_dishes);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(dishAdapter);

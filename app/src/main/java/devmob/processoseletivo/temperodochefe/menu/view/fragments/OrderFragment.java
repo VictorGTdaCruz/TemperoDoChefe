@@ -26,9 +26,9 @@ public class OrderFragment extends BaseMenuFragment {
 
     private FloatingActionButton fab;
 
-    public static OrderFragment newInstance(MenuView menuView, MenuItemClickInterface teste) {
+    public static OrderFragment newInstance(MenuView menuView, MenuItemClickInterface menuItemClickInterface) {
         OrderFragment fragment = new OrderFragment();
-        fragment.setArguments(menuView, true, teste);
+        fragment.setArguments(menuView, true, menuItemClickInterface);
         return fragment;
     }
 
@@ -44,7 +44,7 @@ public class OrderFragment extends BaseMenuFragment {
 
         fab = view.findViewById(R.id.menu_fab_order);
 
-        orderAdapter = new MenuItemFragmentAdapter(getActivity(), true, teste);
+        orderAdapter = new MenuItemFragmentAdapter(getActivity(), menuItemClickInterface, true, true);
         RecyclerView recyclerView = view.findViewById(R.id.menu_recycler_order);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(orderAdapter);
