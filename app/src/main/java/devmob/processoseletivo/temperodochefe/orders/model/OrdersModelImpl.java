@@ -1,6 +1,7 @@
 package devmob.processoseletivo.temperodochefe.orders.model;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,8 +30,10 @@ public class OrdersModelImpl {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<ItemMenu> itemMenus = new ArrayList<>();
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    ItemMenu item = noteDataSnapshot.getValue(ItemMenu.class);
-                    itemMenus.add(item);
+                    for (DataSnapshot individualOrder : noteDataSnapshot.getChildren()){
+                        ItemMenu item = individualOrder.getValue(ItemMenu.class);
+                        itemMenus.add(item);
+                    }
                 }
                 callback.onSuccess(itemMenus);
             }

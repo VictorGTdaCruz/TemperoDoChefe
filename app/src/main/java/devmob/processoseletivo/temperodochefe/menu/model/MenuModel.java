@@ -48,10 +48,10 @@ public class MenuModel {
     }
 
     public void makeNewOrder(Order order) {
-        DatabaseReference ordersRef = database.child("pedidos");
+        DatabaseReference ordersRef = database.child("pedidos").child(String.valueOf(order.getTable()));
 
         DatabaseReference newOrderRef = ordersRef.push();
-        newOrderRef.setValue(order);
+        newOrderRef.setValue(order.getItems());
     }
 
 }

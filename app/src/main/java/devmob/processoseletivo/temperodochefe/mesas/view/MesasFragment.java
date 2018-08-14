@@ -1,6 +1,7 @@
 package devmob.processoseletivo.temperodochefe.mesas.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import devmob.processoseletivo.temperodochefe.R;
 import devmob.processoseletivo.temperodochefe.mesas.adapters.DesksAdapter;
+import devmob.processoseletivo.temperodochefe.orders.view.OrdersActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,5 +46,9 @@ public class MesasFragment extends Fragment implements DesksAdapter.ItemSelectio
     public void onItemSelectionListener(int pos) {
         // Initialize the MenuActivity sending the number of the table and associate an order with the desk
         Log.v("MESA SELECTIONADA: ", String.valueOf(pos));
+        Intent ordersIntent = new Intent(getActivity(), OrdersActivity.class);
+        ordersIntent.putExtra("orders_table_intent_key", pos);
+        startActivity(ordersIntent);
+
     }
 }
