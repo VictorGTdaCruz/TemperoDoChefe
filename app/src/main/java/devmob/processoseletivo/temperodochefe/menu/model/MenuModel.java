@@ -52,9 +52,6 @@ public class MenuModel {
 
         DatabaseReference newOrderRef = ordersRef.push();
         newOrderRef.setValue(order);
-
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        Log.i("user", auth.getUid());
     }
 
 }

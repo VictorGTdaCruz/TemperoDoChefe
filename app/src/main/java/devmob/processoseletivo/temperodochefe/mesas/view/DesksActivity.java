@@ -58,7 +58,6 @@ public class DesksActivity extends AppCompatActivity
         // Handle user data
         auth = FirebaseAuth.getInstance();
         String loggedUser = auth.getCurrentUser().getUid();
-        Log.i("user", auth.getCurrentUser().getEmail());
         DatabaseCon.getUserInfo(loggedUser, this);
     }
 

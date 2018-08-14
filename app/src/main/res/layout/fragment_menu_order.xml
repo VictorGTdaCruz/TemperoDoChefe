@@ -17,6 +17,7 @@
         android:id="@+id/menu_fab_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorSecondaryLight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_check_green_24dp"
