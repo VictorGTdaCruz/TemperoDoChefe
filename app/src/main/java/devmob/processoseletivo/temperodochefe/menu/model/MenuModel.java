@@ -1,7 +1,10 @@
 package devmob.processoseletivo.temperodochefe.menu.model;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,6 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import devmob.processoseletivo.temperodochefe.BuildConfig;
 import devmob.processoseletivo.temperodochefe.core.callback.SimpleCallback;
@@ -43,7 +48,13 @@ public class MenuModel {
     }
 
     public void makeNewOrder(Order order) {
-        database.child("pedidos").setValue(order);
+        DatabaseReference ordersRef = database.child("pedidos");
+
+        DatabaseReference newOrderRef = ordersRef.push();
+        newOrderRef.setValue(order);
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        Log.i("user", auth.getUid());
     }
 
 }

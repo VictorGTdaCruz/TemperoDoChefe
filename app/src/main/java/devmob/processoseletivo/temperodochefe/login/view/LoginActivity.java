@@ -70,7 +70,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
     }
 
     public void navigateToTables(String user){
-        Log.i("logged user:",user);
         Intent mesasIntent = new Intent(this, DesksActivity.class);
         startActivity(mesasIntent);
     }

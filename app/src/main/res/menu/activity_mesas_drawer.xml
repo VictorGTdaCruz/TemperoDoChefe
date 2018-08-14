@@ -11,7 +11,7 @@
             android:id="@+id/nav_menu"
             android:title="Cardápio" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_history"
             android:title="Histórico" />
     </group>
 

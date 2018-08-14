@@ -24,7 +24,7 @@
     <string name="menu_item_btn_text_remove">Remover</string>
     <string name="menu_item_add_message">Item adicionado ao pedido!</string>
     <string name="menu_item_remove_message">Item removido dos pedidos!</string>
-    <string name="title_activity_mesas">MesasActivity</string>
+    <string name="title_activity_mesas">Mesas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Usuário Fulano</string>

@@ -1,5 +1,6 @@
 package devmob.processoseletivo.temperodochefe.mesas.view;
 
+import android.content.Intent;
 import android.media.Image;
 import  android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import devmob.processoseletivo.temperodochefe.R;
+import devmob.processoseletivo.temperodochefe.menu.view.MenuActivity;
 import devmob.processoseletivo.temperodochefe.mesas.model.Employee;
 import devmob.processoseletivo.temperodochefe.mesas.presenter.DatabaseCon;
 import devmob.processoseletivo.temperodochefe.mesas.presenter.EmployeeCallback;
@@ -29,6 +32,7 @@ public class DesksActivity extends AppCompatActivity
 
     private ImageView empImageview;
     private TextView empNameTextview;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,10 @@ public class DesksActivity extends AppCompatActivity
         empImageview = (ImageView) header.findViewById(R.id.employee_imageView);
         empNameTextview = (TextView) header.findViewById(R.id.empUsernameTextview);
         // Handle user data
-        DatabaseCon.getUserInfo("MAek02kKXHAWCnlcdYUqIhNfDi6r1", this);
+        auth = FirebaseAuth.getInstance();
+        String loggedUser = auth.getCurrentUser().getUid();
+        Log.i("user", auth.getCurrentUser().getEmail());
+        DatabaseCon.getUserInfo(loggedUser, this);
     }
 
     @Override
@@ -61,6 +68,7 @@ public class DesksActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            auth.signOut();
             super.onBackPressed();
         }
     }
@@ -79,7 +87,6 @@ public class DesksActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -88,6 +95,11 @@ public class DesksActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
+        if(id == R.id.nav_menu){
+            Intent menuIntent = new Intent(this, MenuActivity.class);
+            startActivity(menuIntent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -38,11 +38,13 @@ public class DatabaseCon {
 
                 Employee emp = new Employee();
                 for (DataSnapshot dt : dataSnapshot.getChildren()) {
-                    String name = dt.child("name").getValue(String.class);
-                    String photoURL = dt.child("photoURL").getValue(String.class);
-
-                    emp.setName(name);
-                    emp.setPhotoUrl(photoURL);
+                    if(dt.getKey().matches(userID)){
+                        String name = dt.child("name").getValue(String.class);
+                        String photoURL = dt.child("photoURL").getValue(String.class);
+                        emp.setName(name);
+                        emp.setPhotoUrl(photoURL);
+                        break;
+                    }
                 }
                 // Implement callback
                 employeeInfoInterface.employeeInforCallback(emp);
