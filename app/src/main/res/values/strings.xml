@@ -19,4 +19,9 @@
     <string name="menu_item_btn_text_remove">Remover</string>
     <string name="menu_item_add_message">Item adicionado ao pedido!</string>
     <string name="menu_item_remove_message">Item removido dos pedidos!</string>
+
+    <!-- Orders -->
+    <string name="orders_table_intent_key">orders_table_intent_key</string>
+    <string name="orders_item_btn_text_remove">Remover item</string>
+
 </resources>
