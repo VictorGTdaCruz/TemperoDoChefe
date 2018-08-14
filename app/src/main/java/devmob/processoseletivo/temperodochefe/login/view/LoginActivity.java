@@ -1,5 +1,6 @@
 package devmob.processoseletivo.temperodochefe.login.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import devmob.processoseletivo.temperodochefe.R;
 import devmob.processoseletivo.temperodochefe.login.presenter.LoginPresenter;
 import devmob.processoseletivo.temperodochefe.login.presenter.LoginPresenterImpl;
+import devmob.processoseletivo.temperodochefe.mesas.view.DesksActivity;
 
 public class LoginActivity extends AppCompatActivity implements LoginView{
 
@@ -69,8 +71,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView{
 
     public void navigateToTables(String user){
         Log.i("logged user:",user);
-        // TODO Make transition to next screen
-        // intent.putExtra("LOGGED_USER", user);
+        Intent mesasIntent = new Intent(this, DesksActivity.class);
+        startActivity(mesasIntent);
     }
 
     private View.OnClickListener viewListener(){

@@ -6,8 +6,6 @@
     <string name="auth_failed">Authorization Failed</string>
     <string name="emailpassword_status_fmt">Email User: %1$s Success</string>
 
-
-
     <!-- Labels -->
     <string name="label_activity_menu">Cardápio</string>
 
@@ -26,4 +24,15 @@
     <string name="menu_item_btn_text_remove">Remover</string>
     <string name="menu_item_add_message">Item adicionado ao pedido!</string>
     <string name="menu_item_remove_message">Item removido dos pedidos!</string>
+    <string name="title_activity_mesas">MesasActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Usuário Fulano</string>
+    <string name="nav_header_subtitle">fulano@temperochefe.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
